@@ -318,7 +318,7 @@ void ProcesarButaca(Matrix[,] matrix, ref int entradasVendidas, ref double recau
             }
 
 
-            columna = columna - 1;
+            columna = columna - 1;  //Para el indice 0
             
             if(matrix[fila, columna] == Matrix.FueraDeServicio || matrix[fila, columna] == Matrix.Ocupada){
                 WriteLine("La butaca que has elegido se encuentra ocupada o fuera de servicio, por favor escoja otra");
