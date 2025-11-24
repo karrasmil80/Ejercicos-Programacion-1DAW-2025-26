@@ -66,7 +66,7 @@ void Main(string[] args){
         
         WriteLine();
         
-        //Thread.Sleep(1000);
+        Thread.Sleep(100);
         tiempo--;
         
         WriteLine($"Tiempo restante : {tiempo}");
@@ -180,7 +180,7 @@ void GenerarArbol(Matrix[,] frontBuffer, int filas, int columnas ,ref int celdas
     var ponerArbol2 = random.Next(0, columnas); //Elige un columna al azar
 
     
-    if(random.NextDouble() < PArder && frontBuffer[ponerArbol, ponerArbol2] == Matrix.Vacio){
+    if(random.NextDouble() < PCrecer && frontBuffer[ponerArbol, ponerArbol2] == Matrix.Vacio){
         //logger.Information("entrando al if [GenerarArbol]");
         frontBuffer[ponerArbol, ponerArbol2] = Matrix.Arbol;
         celdasCrecidas++;
@@ -205,62 +205,74 @@ void ArderEspontaneo(Matrix[,] frontBuffer, int filas, int columnas){
 /*
  * Devuelve verdadero o falso dependiendo de si un vecino es un arbol o esta ardiendo
  */
-bool HasBurningNeighbour(Matrix[,] matrix, int i, int j, int filas, int columnas)  {
-    //Comento este logger por que si no llena la consola de mensajes 
-    //logger.Information("Entrando a HasBurningNeighbour()");
-    
+bool HasBurningNeighbour(Matrix[,] matrix, int i, int j, int filas, int columnas) {
     //Arriba izquierda
-    if (i > 0 && j > 0)
-        //logger.Information("Entrando a if Arriba-izq [HasBourningNeighbour]");
-        if (matrix[i - 1, j - 1] == Matrix.Ardiendo)
+    if (i > 0 && j > 0) {
+        //logger.Information("Entrando a if Arriba-izq [HasBurningNeighbour]");
+        if (matrix[i - 1, j - 1] == Matrix.Ardiendo) {
             return true;
+        }
+    }
 
     //Arriba
-    if (i > 0)
-        //logger.Information("Entrando a if Arriba [HasBourningNeighbour]");
-        if (matrix[i - 1, j] == Matrix.Ardiendo)
+    if (i > 0) {
+        //logger.Information("Entrando a if Arriba [HasBurningNeighbour]");
+        if (matrix[i - 1, j] == Matrix.Ardiendo) {
             return true;
+        }
+    }
 
     //Arriba derecha
-    if (i > 0 && j < columnas - 1)
-        //logger.Information("Entrando a if Arriba-der [HasBourningNeighbour]");
-        if (matrix[i - 1, j + 1] == Matrix.Ardiendo)
+    if (i > 0 && j < columnas - 1) {
+        //logger.Information("Entrando a if Arriba-der [HasBurningNeighbour]");
+        if (matrix[i - 1, j + 1] == Matrix.Ardiendo) {
             return true;
+        }
+    }
 
     //Izquierda
-    if (j > 0)
-        //logger.Information("Entrando a if Izq [HasBourningNeighbour]");
-        if (matrix[i, j - 1] == Matrix.Ardiendo)
+    if (j > 0) {
+        //logger.Information("Entrando a if Izq [HasBurningNeighbour]");
+        if (matrix[i, j - 1] == Matrix.Ardiendo) {
             return true;
+        }
+    }
 
     //Derecha
-    //logger.Information("Entrando a if Der [HasBourningNeighbour]");
-    if (j < columnas - 1)
-        if (matrix[i, j + 1] == Matrix.Ardiendo)
+    if (j < columnas - 1) {
+        //logger.Information("Entrando a if Der [HasBurningNeighbour]");
+        if (matrix[i, j + 1] == Matrix.Ardiendo) {
             return true;
+        }
+    }
 
     //Abajo izquierda
-    if (i < filas - 1 && j > 0)
-        //logger.Information("Entrando a if Abajo-izq [HasBourningNeighbour]");
-        if (matrix[i + 1, j - 1] == Matrix.Ardiendo)
+    if (i < filas - 1 && j > 0) {
+        //logger.Information("Entrando a if Abajo-izq [HasBurningNeighbour]");
+        if (matrix[i + 1, j - 1] == Matrix.Ardiendo) {
             return true;
+        }
+    }
 
     //Abajo
-    if (i < filas - 1)
-        //logger.Information("Entrando a if Abajo [HasBourningNeighbour]");
-        if (matrix[i + 1, j] == Matrix.Ardiendo)
+    if (i < filas - 1) {
+        //logger.Information("Entrando a if Abajo [HasBurningNeighbour]");
+        if (matrix[i + 1, j] == Matrix.Ardiendo) {
             return true;
+        }
+    }
 
     //Abajo derecha
-    if (i < filas - 1 && j < columnas - 1)
-        //logger.Information("Entrando a if Abajo-der [HasBourningNeighbour]");
-        if (matrix[i + 1, j + 1] == Matrix.Ardiendo)
+    if (i < filas - 1 && j < columnas - 1) {
+        //logger.Information("Entrando a if Abajo-der [HasBurningNeighbour]");
+        if (matrix[i + 1, j + 1] == Matrix.Ardiendo) {
             return true;
+        }
+    }
 
     //Si no se cumple ninguna devolvemos falso
     return false;
 }
-
 /*
  * Funcion principal que consiste en hacer que funcione el doble buffer traspasando datos del front al back
  * Maneja los casos con los arboles, fuego y celdas vacias
